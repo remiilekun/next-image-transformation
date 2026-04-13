@@ -11,6 +11,7 @@ The cloud version, with free global CDN and simple pricing available here: https
 - Change the `width` query parameter to see the image resize on the fly.
 - Add the `height` query parameter to see the image crop on the fly.
 - Add the `quality` query parameter to see the image quality change on the fly.
+- Add the `format` query parameter to force a specific output format (e.g. `png`, `jpeg`, `jpg`, `webp`, `avif`).
 
 https://image.coollabs.io/image/https://cdn.coollabs.io/images/image1.jpg?width=500
 
@@ -71,3 +72,4 @@ export default function myImageLoader({ src, width, quality }) {
 - width
 - height
 - quality
+- format — force output format (`png`, `jpeg`, `jpg`, `webp`, `avif`). Invalid values are ignored and the default format negotiation is used.
