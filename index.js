@@ -43,11 +43,15 @@ async function resize(url) {
     const width = url.searchParams.get("width") || 0;
     const height = url.searchParams.get("height") || 0;
     const quality = url.searchParams.get("quality") || 75;
+    const validFormats = new Set(["png", "jpeg", "jpg", "webp", "avif"]);
+    const formatParam = url.searchParams.get("format");
+    const format = validFormats.has(formatParam) ? formatParam : null;
     try {
-        const url = `${imgproxyUrl}/${preset}/resize:fill:${width}:${height}/q:${quality}/plain/${src}`
+        const source = format ? `${src}@${format}` : src;
+        const url = `${imgproxyUrl}/${preset}/resize:fill:${width}:${height}/q:${quality}/plain/${source}`
         const image = await fetch(url, {
             headers: {
-                "Accept": "image/avif,image/webp,image/apng,*/*",
+                "Accept": format ? `image/${format}` : "image/avif,image/webp,image/apng,*/*",
             }
         })
         const headers = new Headers(image.headers);
